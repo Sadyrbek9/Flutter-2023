@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sabak10_end_for_loop/home/user_page.dart';
 import 'package:sabak10_end_for_loop/model.dart';
 
-final studentter = <student>[danyar, azamat, aibek, dinara, ainura];
+final studentter = <Student>[danyar, azamat, aibek, dinara, ainura];
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,8 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   // 1-чи вариант
   void controlNameEmail(String name, String email) {
     // циклдын, функциянын денеси
-    int index =
-        0; // 0дон ьаштап аткарылсын деп интежер тибинде озгормо бердик. Бул биринчи логика.
+    int index = 0; // 0дон ьаштап аткарылсын деп интежер тибинде озгормо бердик. Бул биринчи логика.
     for (final student in studentter) {
       // циклдын ээлери
       index++; // шарт аткарылса, 1ге кощсун, 0+1= 1 болуп, 1ге чыкты
@@ -26,14 +25,13 @@ class _LoginPageState extends State<LoginPage> {
       //почтасы шартка туура келсе, аткарат
       if (name == student.name && email == student.email) {
         // щарт беребиз,.
-
         Navigator.push(
           // кийинки бетке отуучу багыт
           context,
           MaterialPageRoute(
             // жол
             builder: (context) => UserPage(
-              student: student.name,
+              student: student,
             ),
             // 2чи бетти атадык, эгерде жогорку шарт аткарылса, 2чи беттке отот
           ),
@@ -94,7 +92,8 @@ void controlNameEmail(String name, String email) { // циклдын, функц
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                  'https://images.unsplash.com/photo-1544376798-89aa6b82c6cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'),
+                  'https://c4.wallpaperflare.com/wallpaper/362/276/920/nature-4k-pc-full-hd-wallpaper-preview.jpg'),
+                  fit: BoxFit.cover,
             ),
           ),
           child: Padding(
