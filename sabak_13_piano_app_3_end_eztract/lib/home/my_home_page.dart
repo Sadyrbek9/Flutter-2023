@@ -17,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Extract Widget'),
+          title: const Center(child:  Text('Extract Widget')),
         ),
         body: Center(
           child: Column(
@@ -27,7 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ContainerWidget(
                     containerdinTexty: 'Container 1',
                     containerdinTexty2: 'Sabak 6',
-                    icon: Icons.sms,
+                    icon: Icons.music_note,
                     image: 'https://img.freepik.com/premium-photo/flag-of-kyrgyzstan-silk-close-up-background_406939-172.jpg',
                   ),
                     SizedBox(
