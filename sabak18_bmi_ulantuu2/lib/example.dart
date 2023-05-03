@@ -23,14 +23,14 @@ class _ForExampleState extends State<ForExample> {
               onTap: () {
                 setState(() {
                 isTrue = true;
-              print(isTrue);  
+              
                 });
              
               },
               child: Container(
                 width: 50,
                 height: 50,
-                color: isTrue == true ? Colors.red : Colors.green
+                color: isTrue == true ? Colors.red : Colors.brown
               ),
             ),
             const SizedBox(height: 20),
