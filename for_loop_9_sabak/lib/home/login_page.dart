@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -14,55 +15,50 @@ class _LoginPageState extends State<LoginPage> {
         centerTitle: true,
         title: Text('LoginPage'.toUpperCase()),
       ),
-      body:
-      Column(
-        
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        
-        children:[
+        children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-           children: const [
-             FlutterLogo(size: 80,),
-             Text('Flutter', style: TextStyle(fontSize: 70),),
-          
-           ],
-          
+            children: const [
+              FlutterLogo(
+                size: 70,
+              ),
+              Text(
+                'Flutter',
+                style: TextStyle(fontSize: 50),
+              ),
+            ],
           ),
-         
           const Text(
-            'Welcome to Saifty!', style: TextStyle(fontSize: 25, fontWeight:FontWeight.w600),
+            'Welcome to Saifty!!!!',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+          ),
+          const Text('Keep Your Data Safe!!!!!'),
+          const Padding(
+            // эки жагынан тептиребиз
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), labelText: 'Name'),
             ),
-            const Text(
-              'Keep Your Data Safe!'
-              ),
-              const Padding(  // эки жагынан тептиребиз
-                padding: EdgeInsets.only(left: 15, right: 15, top: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Name'
-                  ),
-                ),
-              ),
-               const Padding(  // эки жагынан тептиребиз
-                padding: EdgeInsets.only(left: 15, right: 15, top: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'email'
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              ElevatedButton(
-                style:ElevatedButton.styleFrom(
-                  minimumSize: const Size(250, 40)
-                ),
-                onPressed: (){}, child: const Text('Login'),
-              ),
+          ),
+          const Padding(
+            // эки жагынан тептиребиз
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), labelText: 'email'),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(minimumSize: const Size(250, 40)),
+            onPressed: () {},
+            child: const Text('Login'),
+          ),
         ],
       ),
     );
