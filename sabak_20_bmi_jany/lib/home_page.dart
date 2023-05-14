@@ -1,14 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:sabak20_bmi_ulantuu_4/components/calculate_button.dart';
-import 'package:sabak20_bmi_ulantuu_4/components/height.dart';
-import 'package:sabak20_bmi_ulantuu_4/components/male_female.dart';
-import 'package:sabak20_bmi_ulantuu_4/components/result_page.dart';
-import 'package:sabak20_bmi_ulantuu_4/components/status_card.dart';
-import 'package:sabak20_bmi_ulantuu_4/components/weght_age.dart';
-import 'package:sabak20_bmi_ulantuu_4/theme/app_colors.dart';
-import 'package:sabak20_bmi_ulantuu_4/theme/app_texts.dart';
+import 'package:sabak_20_bmi_jany/components/calculate_button.dart';
+import 'package:sabak_20_bmi_jany/components/height.dart';
+import 'package:sabak_20_bmi_jany/components/male_female.dart';
+import 'package:sabak_20_bmi_jany/components/status_card.dart';
+import 'package:sabak_20_bmi_jany/components/weght_age.dart';
+import 'package:sabak_20_bmi_jany/theme/app_colors.dart';
+import 'package:sabak_20_bmi_jany/theme/app_texts.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -150,13 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: CalculateButton(
         onPressed: () {
-          //resultattar();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ResultPage(metri: height, salmak: weight,),
-            ),
-          );
+          resultattar();
         },
       ),
     );
