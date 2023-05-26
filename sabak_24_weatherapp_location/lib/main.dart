@@ -100,15 +100,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 ///////////////////////////////////////////////////
 
-  Future<void> fetchData() async {
+  Future<void> fetchData([String? url]) async {
     // fetchData nyn ichin snapshot okui beret
     // fetchData bul funkzia, al - async funkziasy
     Dio dio = Dio(); // plagin, serverden data alip keluuchu plagin
     // await Future.delayed(
     //   const Duration(seconds: 7),
     // ); //kutuu uchun ubakyt berdik
-    final responce = await dio.get(ApiConst
-        .weatherData); // dio.get metodu arkyluu ssylkany tartip aldyk (any await ge bailaibyz)
+    final responce = await dio.get(ApiConst.weatherData(url ??
+        'bishkek')); // dio.get metodu arkyluu ssylkany tartip aldyk (any await ge bailaibyz)
     if (responce.statusCode == 200) {
       weather = Weather(
         id: responce.data['weather'][0]['id'],
@@ -138,85 +138,88 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('bg_image.jpg'),
-            ),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: weather == null
+            ? const CircularProgressIndicator()
+            : Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('bg_image.jpg'),
+                  ),
+                ),
+                child: Column(
                   children: [
-                    IconButton(
-                      onPressed: () async {
-                        await getLocation();
-                        print('>>>>>>>>${getLocation()}');
-                      },
-                      icon: const Icon(
-                        Icons.near_me,
-                        color: AppColors.iconcolor,
-                        size: 48,
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, top: 10, right: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            onPressed: () async {
+                              await getLocation();
+                            },
+                            icon: const Icon(
+                              Icons.near_me,
+                              color: AppColors.iconcolor,
+                              size: 48,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              showBottom();
+                            },
+                            icon: const Icon(
+                              Icons.location_city,
+                              color: AppColors.iconcolor,
+                              size: 48,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    IconButton(
-                      onPressed: () async {
-                        showBottom();
-                      },
-                      icon: const Icon(
-                        Icons.location_city,
-                        color: AppColors.iconcolor,
-                        size: 48,
+                    const SizedBox(height: 50),
+                    Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                        ),
+                        Text(
+                          '${(weather!.temp - 273.15).toInt()}',
+                          style: AppTextStyles.sanTextStyle,
+                        ),
+                        Image.network(
+                          ApiConst.getIcon(weather!.icon, 4),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: FittedBox(
+                        child: Text(
+                          weather!.description.replaceAll(' ', '\n'),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 70),
+                        ),
                       ),
                     ),
+                    Expanded(
+                      child: FittedBox(
+                        child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              weather!.name,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 70),
+                            )),
+                      ),
+                    )
                   ],
                 ),
               ),
-              const SizedBox(height: 50),
-              Row(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 10),
-                  ),
-                  Text(
-                    '${(weather!.temp - 273.15).toInt()}',
-                    style: AppTextStyles.sanTextStyle,
-                  ),
-                  Image.network(
-                    ApiConst.getIcon(weather!.icon, 4),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: FittedBox(
-                  child: Text(
-                    weather!.description.replaceAll(' ', '\n'),
-                    style: const TextStyle(color: Colors.white, fontSize: 70),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: FittedBox(
-                  child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        weather!.name,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 70),
-                      )),
-                ),
-              )
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -226,15 +229,26 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 500,
-          color: Colors.amber,
+          height: 300,
+          // decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          color: Colors.grey,
           child: ListView.builder(
             itemCount: cities.length,
             itemBuilder: (context, index) {
               final city = cities[index];
               return Card(
                 child: ListTile(
-                  title: Text('$city'),
+                  onTap: () {
+                    setState(() {
+                      weather = null;
+                    });
+                    fetchData(city);
+                    Navigator.pop(context);
+                  },
+                  title: Text(
+                    '$city',
+                    style: AppTextStyles.showTextStyle,
+                  ),
                 ),
               );
             },
