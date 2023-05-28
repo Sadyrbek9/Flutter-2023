@@ -31,7 +31,7 @@ const List cities = <String>[
   'Bishkek',
   "Osh",
   'Jalal-Abad',
-  'Kara Kol',
+  'KaraKol',
   'Naryn',
   'Talas',
   'Batken',
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //   const Duration(seconds: 7),
       // ); //kutuu uchun ubakyt berdik
       final responce = await dio.get(
-        ApiConst.address(),
+        ApiConst.address(lat: position.latitude, lon: position.longitude),
       ); // dio.get metodu arkyluu ssylkany tartip aldyk (any await ge bailaibyz)
       if (responce.statusCode == 200) {
         weather = Weather(
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //   const Duration(seconds: 7),
       // ); //kutuu uchun ubakyt berdik
       final responce = await dio.get(
-        ApiConst.address(),
+        ApiConst.address(lat: position.latitude, lon: position.longitude),
       ); // dio.get metodu arkyluu ssylkany tartip aldyk (any await ge bailaibyz)
       if (responce.statusCode == 200) {
         weather = Weather(
@@ -138,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: weather == null
+        child: weather == null  // data kelgenche kutup turuu ychyn 
             ? const CircularProgressIndicator()
             : Container(
                 decoration: const BoxDecoration(
@@ -229,9 +229,12 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 300,
-          // decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-          color: Colors.grey,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+             color: Colors.grey[700],
+          ),
+          height: 200,
+         
           child: ListView.builder(
             itemCount: cities.length,
             itemBuilder: (context, index) {

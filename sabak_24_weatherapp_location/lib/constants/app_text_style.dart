@@ -10,6 +10,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
   );
   static const showTextStyle =
-      TextStyle(fontSize: 25, fontWeight: FontWeight.w700);
+      TextStyle(fontSize: 25, fontWeight: FontWeight.w800);
   // static const calculateStyle = TextStyle(fontSize: 22, fontWeight: FontWeight.w500);
 }
