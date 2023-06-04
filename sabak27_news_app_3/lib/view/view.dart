@@ -11,7 +11,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  TopNews? topNews;
+  TopNews? topNews; // peremennyi topNews
   Future<void> fetchNews() async {
     topNews = await TopNewsRepo().fetchTopNews();
     setState(() {});
@@ -36,26 +36,26 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
-      body: topNews == null
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: topNews!.article.length,
-              itemBuilder: (context, index) {
-                final news = topNews!.article[index];
+      body: topNews == null // эгер topNews нул болсо
+          ? const Center(child: CircularProgressIndicator()) // ailanyp tursun,
+          : ListView.builder( // egerde topNews null emes bolso, anda ListView.builder iwtasin
+              itemCount: topNews!.article.length, // topNews! tun ichindegy articledyn uzundugun-maalimatty al dep berebyz, 
+              itemBuilder: (context, index) { // ListView nun soderjaniesy, indexi - berdik
+                final news = topNews!.article[index]; // news degen peremennyiga - bailadyk, koldono bersek bolot 
                 return InkWell(
                   onTap: () {},
-                  child: Card(
+                  child: Card( // soderjaniany kaitaruu - Card turundo
                     color: Colors.grey[100],
                     child: Row(
                       children: [
                         Expanded(
                           flex: 3,
                           child: Image.network(
-                              news.urlToImage ?? ApiConst.newsImage),
+                              news.urlToImage ?? ApiConst.newsImage), // news peremennyiga - indextin urlToImage dep suroty kelsin, egerde surotu null bolso ?? (ApiConst.newsImage dep - defoltnyi surot tartyp alabyz)
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(news.title),
+                          child: Text(news.title), // bul news tun teksty
                         ),
                       ],
                     ),
