@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sabak28_new_app_4/constans/api_const.dart';
 import 'package:sabak28_new_app_4/model/top_news.dart';
@@ -68,7 +69,15 @@ class _HomeViewState extends State<HomeView> {
                       children: [
                         Expanded(
                           flex: 3,
-                          child: Image.network(news.urlToImage ??
+                          child: 
+                          // CachedNetworkImage(
+                          //   imageUrl: news.urlToImage ?? ApiConst.newsImage,
+                          //   placeholder: (context, url) =>
+                          //       const CircularProgressIndicator(),
+                          //   errorWidget: (context, url, error) =>
+                          //       Image.asset('assets/errorimage.jpg'),
+                          // ),
+                          Image.network(news.urlToImage ??
                               ApiConst
                                   .newsImage), // news peremennyiga - indextin urlToImage dep suroty kelsin, egerde surotu null bolso ?? (ApiConst.newsImage dep - defoltnyi surot tartyp alabyz)
                         ),

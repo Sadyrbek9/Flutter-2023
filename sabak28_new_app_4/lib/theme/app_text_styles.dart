@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTextStyle{
   static const TextStyle descrTextStyle = TextStyle(
-    color: Colors.black54, fontSize: 22, fontWeight: FontWeight.w400,
+    color: Colors.black54, fontSize: 20, fontWeight: FontWeight.w400,
   );
 
   static const TextStyle titleTextStyle = TextStyle(
