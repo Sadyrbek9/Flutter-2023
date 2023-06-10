@@ -6,6 +6,7 @@ import 'package:sabak29_news_app_5/components/detail_news_time.dart';
 import 'package:sabak29_news_app_5/components/detail_site_button.dart';
 import 'package:sabak29_news_app_5/components/detail_title.dart';
 import 'package:sabak29_news_app_5/model/article.dart';
+import 'package:sabak29_news_app_5/theme/app_colors.dart';
 import 'package:share_plus/share_plus.dart';
 
 class DetailView extends StatelessWidget {
@@ -18,7 +19,7 @@ class DetailView extends StatelessWidget {
         .format(DateTime.parse(article.publishedAt));
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: AppColors.detailAppBarColors,
         centerTitle: true,
         title: Text(article.title),
         actions: article.url.isNotEmpty

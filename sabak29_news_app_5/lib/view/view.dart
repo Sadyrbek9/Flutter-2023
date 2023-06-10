@@ -1,9 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sabak29_news_app_5/components/home_news_card.dart';
 
 import 'package:sabak29_news_app_5/constans/api_const.dart';
+import 'package:sabak29_news_app_5/model/article.dart';
+import 'package:sabak29_news_app_5/model/domain_countries.dart';
 import 'package:sabak29_news_app_5/model/top_news.dart';
 import 'package:sabak29_news_app_5/service/fetch_service.dart';
+import 'package:sabak29_news_app_5/theme/app_colors.dart';
+import 'package:sabak29_news_app_5/theme/app_text.dart';
+import 'package:sabak29_news_app_5/theme/app_text_styles.dart';
+import 'package:sabak29_news_app_5/theme/sized.dart';
 import 'package:sabak29_news_app_5/view/detail_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -15,8 +22,12 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   TopNews? topNews; // peremennyi topNews
-  Future<void> fetchNews() async {
-    topNews = await TopNewsRepo().fetchTopNews(); //bizdin datany tartyp kelet
+  Future<void> fetchNews([String? domain]) async {
+    //[] bul sozsyz albait,
+    topNews = null;
+    setState(() {});
+    topNews =
+        await TopNewsRepo().fetchTopNews(domain); //bizdin datany tartyp kelet
     setState(() {});
   }
 
@@ -28,18 +39,29 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.grey,
       appBar: AppBar(
-        backgroundColor: const Color(0xfffE5722),
+        backgroundColor: AppColors.appBarColors,
         title: const Text(
-          'News Aggregator',
-          style: TextStyle(color: Colors.white),
+          AppText.agr,
+          style: AppTextStyle.agrStyle,
         ),
-        actions: const [
-          Icon(
-            Icons.more_vert,
-            color: Colors.white,
-          ),
+        actions: [
+          PopupMenuButton<Country>(
+            onSelected: (Country item) async {
+              await fetchNews(item.domain);
+            },
+            itemBuilder: (BuildContext context) {
+              return countrySet
+                  .map(
+                    (e) => PopupMenuItem<Country>(
+                      value: e,
+                      child: Text(e.name),
+                    ),
+                  )
+                  .toList();
+            },
+          )
         ],
       ),
       body: topNews == null // эгер topNews нул болсо
@@ -52,43 +74,10 @@ class _HomeViewState extends State<HomeView> {
                 // ListView nun soderjaniesy, indexi - berdik
                 final news = topNews!.article[
                     index]; // news degen peremennyiga - topNews tun indexin bailadyk, koldono bersek bolot
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailView(
-                          article: news,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    // soderjaniany kaitaruu - Card turundo
-                    color: Colors.grey[100],
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: CachedNetworkImage(
-                            imageUrl: news.urlToImage ?? ApiConst.newsImage,
-                            placeholder: (context, url) =>
-                                // const CircularProgressIndicator(),
-                                Image.asset('assets/waitImages.jpg'),
-                            errorWidget: (context, url, error) =>
-                                Image.asset('assets/errorimage.jpg'),
-                          ),
-                        ),
-                        const SizedBox(width: 5),
-                        Expanded(
-                          flex: 5,
-                          child: Text(news.title), // bul news tun teksty
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                return CardNews(news: news);
               }),
     );
   }
 }
+
+
