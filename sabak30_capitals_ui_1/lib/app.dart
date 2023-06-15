@@ -8,14 +8,20 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false,
+    return MaterialApp(
+
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(scaffoldBackgroundColor: AppColors.scaffoldColor,
       appBarTheme: const AppBarTheme(color: AppColors.appColor),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+       
+        sliderTheme: SliderThemeData(
+          thumbShape: SliderComponentShape.noOverlay,
       ),
-      home: const HomeView(),
+      useMaterial3: true,
+    ),
+     home: const HomeView(),
     );
   }
 }
