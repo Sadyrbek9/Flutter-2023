@@ -68,10 +68,10 @@ class _TestViewState extends State<TestView> {
         children: [
           Slider(
             activeColor: Colors.black,
-            value: 200,
+            value: indexText.toDouble(),
             onChanged: (v) {},
             min: 0,
-            max: 200,
+            max: 5,
           ),
           Text(
             widget.suroo[indexText].text,

@@ -81,11 +81,14 @@ class _HomeViewState extends State<HomeView> {
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold, color: continents[index].color,),
                             ),
-                            SvgPicture.asset(
-                              'assets/continents/${continents[index].image}.svg',
-                              color: continents[index].color,
-                              width: 110,
-                      
+                            Expanded(
+                              child: SvgPicture.asset(
+                                'assets/continents/${continents[index].image}.svg',
+                                color: continents[index].color,
+                                width: 100,
+                                height: 80,
+                                                  
+                              ),
                             ),
                           ],
                         ),
