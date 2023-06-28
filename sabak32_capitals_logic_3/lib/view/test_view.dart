@@ -113,9 +113,12 @@ class _TestViewState extends State<TestView> {
                                   indexText = 0;
                                   tuuraJoop = 0;
                                   kataJoop = 0;
-                                  setState(() {});
-                                  Navigator.pop(context);
+                                  setState(() {
+                                    Navigator.pop(context);
+                                
+                                });
                                 },
+                                  
                                 child: const Text('Cancel'),
                               ),
                             ],
@@ -128,10 +131,10 @@ class _TestViewState extends State<TestView> {
                         } else {
                           kataJoop++;
                         }
-                      }
-                      setState(() {
+                        setState(() {
                         indexText++;
                       });
+                      }
                     },
                     child: Center(
                       child: Text(widget.suroo[indexText].jooptor[index].text),
