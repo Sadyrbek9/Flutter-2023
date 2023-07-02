@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sabak33_firebase_copy/views/home_view.dart';
 import 'package:sabak33_firebase_copy/views/todo_view.dart';
 
 class MyApp extends StatelessWidget {

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "342558427137",
+    "project_id": "todocopy-9ca02",
+    "storage_bucket": "todocopy-9ca02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342558427137:android:cbe28010b518b886731800",
+        "android_client_info": {
+          "package_name": "com.example.sabak33_firebase_copy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342558427137-frspf6sp658dk6rcr4mublje2ruvuade.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQs4rKNbUJckzyMmgTPf0F9hZXYw1LumY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342558427137-frspf6sp658dk6rcr4mublje2ruvuade.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "342558427137-ssndodn83bqvcuhcrggvaisdo3r49puq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sabak33FirebaseCopy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
