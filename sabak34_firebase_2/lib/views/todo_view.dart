@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sabak34_firebase_2/views/home.view.dart';
+import 'package:sabak34_firebase_2/model.dart';
 
 class TodoView extends StatefulWidget {
   const TodoView({super.key});
@@ -14,13 +15,20 @@ class _TodoViewState extends State<TodoView> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _authorController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  ///////////////////////////////////////////////
-  ///
-  Future<void> addTodo()async{
-    final db = Firebasefirestore.instance;
-  } 
+// 
+  Future <void> addToDo ()async {
+    final db = FirebaseFirestore.instance;
+    final todos = Todo(
+      title: _titleController.text, 
+      description: _descriptionController.text, 
+      isCompleted: isCompleted, 
+      author: _authorController.text);
+      await db.collection('todos').add(todos.toMap());
+  }
   
+  
+
+  }
   
   
   @override
@@ -107,15 +115,10 @@ class _TodoViewState extends State<TodoView> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
                 ),
-                onPressed: () {
+                onPressed: () async{
                   if (_formKey.currentState!.validate()) {
                     // formanyn i4i tolso
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (c) => const HomeView(),
-                      ),
-                    );
+                    await addToDo();
                   } else {
                     null;
                   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:variant_din_bil/constants/app_colors.dart';
-import 'package:variant_din_bil/view/home_page.dart';
+import 'package:variant_din_bil/view/first_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 4, 165, 154)),
         useMaterial3: true,
       ),
-      home: const HomeViewPage(),
+      home: const FirstPage(suroo: '', joop: '',),
     );
   }
 }
